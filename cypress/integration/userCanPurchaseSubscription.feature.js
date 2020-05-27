@@ -32,6 +32,15 @@ describe("user can purchase a subscription", () => {
 
   it("by clicking button Buy subscription", () => {
     cy.get("button").contains("Buy Subscription").click();
-    cy.get("form#payment-form").should("be.visible");
+    cy.get("#payment-interface").should("be.visible");
+    cy.wait(1000);
+    cy.typeInStripeElement("cardnumber", "42424242424242");
+    cy.typeInStripeElement("exp-date", "1221");
+    cy.typeInStripeElement("cvc", "132");
+    cy.get("Button").contains("Submit").click();
+    cy.get("#subscription-message").should(
+      "contain",
+      "Transaction was successfull"
+    );
   });
 });
