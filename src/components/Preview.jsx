@@ -5,6 +5,7 @@ import { connect, useSelector } from "react-redux";
 
 const Preview = () => {
   const selectedArticle = useSelector((state) => state.selectedArticle);
+  debugger;
   return (
     <Container id="preview" align="center">
       <Grid>
@@ -27,4 +28,4 @@ const Preview = () => {
   );
 };
 
-export default connect()(Preview);
+export default Preview;

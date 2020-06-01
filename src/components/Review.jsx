@@ -12,7 +12,6 @@ const Review = (props) => {
   const [unpublishedArticleList, setUnpublishedArticleList] = useState([]);
   //   const [selectedArticle, setSelectedArticle] = useState();
   const selectedArticle = useSelector((state) => state.selectedArticle);
-
   const [previewMessage, setPreviewMessage] = useState(
     "Select an article in the list to preview"
   );
@@ -41,7 +40,9 @@ const Review = (props) => {
             <List.Item
               key={article.id}
               id={`article-${article.id}`}
-              onClick={(props) => fetchWrapper}
+              onClick={() =>
+                fetchWrapper(props.dispatch, article.id, setPreviewMessage)
+              }
             >
               <List.Icon
                 name="exclamation"
