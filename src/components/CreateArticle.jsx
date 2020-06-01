@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import WritingForm from "./WritingForm";
 import { Container, Image } from "semantic-ui-react";
+import createHeaders from "../modules/headers";
 
 const CreateArticle = () => {
   const [message, setMessage] = useState("");
@@ -22,8 +23,9 @@ const CreateArticle = () => {
   const onSubmitHandler = async (e) => {
     try {
       e.persist();
-      const category = document.getElementById('category').firstElementChild.innerText.toLowerCase()
-      const headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+      const category = document
+        .getElementById("category")
+        .firstElementChild.innerText.toLowerCase();
       let encodedImage;
       if (e.target.image.files[0]) {
         encodedImage = await toBase64(e.target.image.files[0]);
@@ -36,7 +38,7 @@ const CreateArticle = () => {
           image: encodedImage,
           category: category,
         },
-        { headers: headers }
+        { headers: createHeaders() }
       );
       e.target.reset()
       setImagePreview("")

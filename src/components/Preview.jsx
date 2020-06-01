@@ -1,8 +1,10 @@
 import React from "react";
 import { Container, Grid, Image } from "semantic-ui-react";
 import "../css/Preview.css";
+import { connect, useSelector } from "react-redux";
 
-const Preview = ({ selectedArticle }) => {
+const Preview = () => {
+  const selectedArticle = useSelector((state) => state.selectedArticle);
   return (
     <Container id="preview" align="center">
       <Grid>
@@ -25,4 +27,4 @@ const Preview = ({ selectedArticle }) => {
   );
 };
 
-export default Preview;
+export default connect()(Preview);
