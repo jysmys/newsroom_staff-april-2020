@@ -14,6 +14,11 @@ const rootReducer = (state = initialState, action) => {
         uid: "",
         authenticatedAs: "",
       };
+    case "SINGLE_ARTICLE":
+      return {
+        ...state,
+        article: action.payload.article,
+      };
     default:
       return state;
   }

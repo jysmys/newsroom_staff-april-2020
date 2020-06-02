@@ -1,13 +1,10 @@
 import React from "react";
 import { Form, Button, Input, Dropdown, Image } from "semantic-ui-react";
+import categoryList from "../modules/category";
 
 const WritingForm = (props) => {
-  const cats = ["Other", "Sport", "Local", "Politics", "Economy", "World", "Entertainment"]
-  
-  const categories = cats.map((category) => {
-    return { key: category, text: category, value: category.toLowerCase() }
-  })
-  
+  const categories = categoryList();
+
   return (
     <>
       <Form onSubmit={props.onSubmitHandler}>
@@ -26,7 +23,13 @@ const WritingForm = (props) => {
         </Form.Field>
         <Form.Field>
           <label>Category</label>
-          <Dropdown selection id="category" name="category" placeholder="Other" options={categories}></Dropdown>
+          <Dropdown
+            selection
+            id="category"
+            name="category"
+            placeholder="Other"
+            options={categories}
+          ></Dropdown>
         </Form.Field>
         <Form.Field>
           <label>Article body</label>
