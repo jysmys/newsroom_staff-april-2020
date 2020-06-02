@@ -2,26 +2,24 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import UpdateArticle from "./UpdateArticle";
 import createHeaders from "../modules/headers";
-import fetchWrapper from "../modules/fetchArticle";
-import { connect, useSelector } from "react-redux";
+import fetchArticle from "../modules/fetchArticle";
+import { connect, useDispatch } from "react-redux";
 
 const PublishArticle = (props) => {
-  const selectedArticle = useSelector((state) => state.selectedArticle);
-  const [radio, setRadio] = useState("free");
+  const dispatch = useDispatch();
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    fetchWrapper(props.match.params.id);
+    fetchArticle(dispatch, setMessage, props.match.params.id);
   }, []);
 
-  const onSubmitHandler = async () => {
+  const onSubmitHandler = async (e) => {
     try {
       const response = await axios.put(
         `/admin/articles/${props.match.params.id}`,
-
         {
           activity: "PUBLISH",
-          premium: radio === "premium" ? true : false,
+          premium: e.target.premium.value,
           category: document
             .getElementById("category")
             .firstElementChild.innerText.toLowerCase(),
@@ -35,16 +33,11 @@ const PublishArticle = (props) => {
       setMessage(error.response.data.message);
     }
   };
+
   return (
     <>
       <div id="publish-page">
-        {selectedArticle && (
-          <UpdateArticle
-            onSubmitHandler={onSubmitHandler}
-            setRadio={setRadio}
-            radio={radio}
-          />
-        )}
+        <UpdateArticle onSubmitHandler={onSubmitHandler} message={message} />
       </div>
     </>
   );

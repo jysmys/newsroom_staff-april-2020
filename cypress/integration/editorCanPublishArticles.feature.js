@@ -41,7 +41,7 @@ describe("editor can publish articles", () => {
     });
 
     it("change article class and publish", () => {
-      cy.get('[type="radio"]').check("premium");
+      cy.get('[type="radio"]').last().check();
       cy.get("#publish-btn").click();
       cy.get("#message").should("contain", "Article successfully published!");
     });

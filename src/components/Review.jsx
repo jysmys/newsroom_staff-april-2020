@@ -4,17 +4,17 @@ import axios from "axios";
 import "../css/Review.css";
 import Preview from "./Preview";
 import { Link } from "react-router-dom";
-import fetchWrapper from "../modules/fetchArticle";
+import fetchSingleArticle from "../modules/fetchArticle";
 import createHeaders from "../modules/headers";
-import { connect, useSelector } from "react-redux";
+import { connect, useSelector, useDispatch } from "react-redux";
 
 const Review = (props) => {
   const [unpublishedArticleList, setUnpublishedArticleList] = useState([]);
-  //   const [selectedArticle, setSelectedArticle] = useState();
-  const selectedArticle = useSelector((state) => state.selectedArticle);
+  const singleArticle = useSelector((state) => state.article);
   const [previewMessage, setPreviewMessage] = useState(
     "Select an article in the list to preview"
   );
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchUnpublishedArticleList = async () => {
@@ -41,7 +41,7 @@ const Review = (props) => {
               key={article.id}
               id={`article-${article.id}`}
               onClick={() =>
-                fetchWrapper(props.dispatch, article.id, setPreviewMessage)
+                fetchSingleArticle(dispatch, setPreviewMessage, article.id)
               }
             >
               <List.Icon
@@ -72,7 +72,7 @@ const Review = (props) => {
       </List>
     );
 
-  const previewRender = selectedArticle ? (
+  const previewRender = singleArticle ? (
     <Preview />
   ) : (
     <div id="preview-message">{previewMessage}</div>
