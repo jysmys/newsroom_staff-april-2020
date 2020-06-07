@@ -30,7 +30,7 @@ describe("Editor can see unpublished articles", () => {
       cy.get("#preview").within(() => {
         cy.get("#preview-title").should("contain", "title 1");
         cy.get("#body").should("contain", "Lorem ipsum");
-        cy.get("#image").should("be.visible");
+        cy.get(".image").should("be.visible");
       });
     });
   });

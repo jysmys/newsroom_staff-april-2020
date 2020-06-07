@@ -17,6 +17,12 @@ p {
 .header.menu {
   background-color: #409d9b !important;
   width: 100% !important;
+  margin-bottom: 60px !important;
+}
+
+.header-container {
+  background-color: #409d9b !important;
+  width: 100% !important;
 }
 
 .header > * {
@@ -30,8 +36,7 @@ p {
 
 .writing-container {
   float: left; 
-  padding-left: 40px; 
-  padding-top: 40px;
+  padding-left: 80px;
   width: 40% !important;
 }
 
@@ -52,4 +57,36 @@ p {
 
 #login-form > * {
   margin: 1px
+}
+
+#publish-page {
+  width: 100%;
+}
+
+#form-container {
+  margin-left: -100px;
+  height: 428px !important; 
+  width: 428px;
+  display: flex !important; 
+  flex-direction: column !important; 
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+}
+
+#publishing-form {
+  width: 300px;
+  height: 300px;
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-evenly;
+  align-items: stretch
+}
+
+label {
+  margin: 10px;
+}
+
+#error-message {
+  position: absolute;
+  top: 300px;
 }

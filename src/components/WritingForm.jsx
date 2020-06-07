@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button, Input, Dropdown, Image } from "semantic-ui-react";
+import { Form, Button, Input, Dropdown } from "semantic-ui-react";
 import categoryList from "../modules/category";
 
 const WritingForm = (props) => {
@@ -39,8 +39,8 @@ const WritingForm = (props) => {
             placeholder="Write your article here"
           />
         </Form.Field>
-        <Button id="post" type="submit">
-          Post Article
+        <Button color="teal" loading={props.loading} id="post" type="submit">
+          Submit Article
         </Button>
         <p id="message">{props.message}</p>
       </Form>

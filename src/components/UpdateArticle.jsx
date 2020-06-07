@@ -1,6 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import categoryList from "../modules/category";
-import { Container, Grid, Form, Dropdown, Button } from "semantic-ui-react";
+import {
+  Container,
+  Grid,
+  Form,
+  Dropdown,
+  Button,
+  Checkbox,
+} from "semantic-ui-react";
 import Preview from "./Preview";
 import { useSelector } from "react-redux";
 
@@ -11,49 +19,82 @@ const UpdateArticle = (props) => {
   return (
     <>
       {selectedArticle && (
-        <Grid columns={2}>
-          <Grid.Column id="left">
-            <Container>
-              <Preview selectedArticle={selectedArticle} />
+        <Grid>
+          <Grid.Column width={1} />
+          <Grid.Column id="preview" width={8}>
+            <Preview selectedArticle={selectedArticle} />
+          </Grid.Column>
+            <Container id="form-container">
+              <Link to="/review" id="back-btn">
+                <Button>Back to list</Button>
+              </Link>
+              {props.message === "Article successfully published!" ? (
+                <p id="success-message">{props.message}</p>
+              ) : (
+                <Form
+                  id="publishing-form"
+                  onSubmit={(e) => props.onSubmitHandler(e)}
+                >
+                  <Form.Field>
+                    <label>Category</label>
+                    <Dropdown
+                      selection
+                      id="category"
+                      name="category"
+                      placeholder={selectedArticle.category}
+                      options={categories}
+                    ></Dropdown>
+                  </Form.Field>
+                  <Form.Field>
+                    <Checkbox
+                      toggle
+                      id="radio-free"
+                      label="Free"
+                      name="premium"
+                      value={false}
+                      type="radio"
+                      defaultChecked
+                    />
+                    <Checkbox
+                      toggle
+                      id="radio-premium"
+                      label="Premium"
+                      name="premium"
+                      value={true}
+                      type="radio"
+                    />
+                  </Form.Field>
+                  <Form.Field>
+                    <Checkbox
+                      id="checkbox-sweden"
+                      name="local"
+                      value={false}
+                      type="checkbox"
+                      label="Local News Sweden"
+                    />
+                    <Checkbox
+                      id="checkbox-International"
+                      name="international"
+                      value={false}
+                      type="checkbox"
+                      label="International News"
+                      style={{ paddingRight: "2px" }}
+                    />
+                  </Form.Field>
+                  <Form.Field>
+                    <Button
+                      loading={props.loading}
+                      color="teal"
+                      id="publish-btn"
+                      type="submit"
+                    >
+                      Publish Article
+                    </Button>
+                  </Form.Field>
+                  <p id="error-message">{props.message}</p>
+                </Form>
+              )}
             </Container>
-          </Grid.Column>
-          <Grid.Column>
-            <Form onSubmit={(e) => props.onSubmitHandler(e)}>
-              <Form.Field>
-                <label>Category</label>
-                <Dropdown
-                  selection
-                  id="category"
-                  name="category"
-                  placeholder={selectedArticle.category}
-                  options={categories}
-                ></Dropdown>
-              </Form.Field>
-              <Form.Field>
-                <input
-                  id="radio-free"
-                  label="Free"
-                  name="premium"
-                  value={true}
-                  type="radio"
-                  defaultChecked
-                />
-                <label style={{ display: "inline" }}> Free </label>
-                <input
-                  id="radio-premium"
-                  label="Premium"
-                  name="premium"
-                  value={false}
-                  type="radio"
-                />
-                <label style={{ display: "inline" }}> Premium</label>
-              </Form.Field>
-              <Button id="publish-btn" type="submit">
-                Publish Article
-              </Button>
-              <p id="message">{props.message}</p>
-            </Form>
-          </Grid.Column>
         </Grid>
       )}
     </>

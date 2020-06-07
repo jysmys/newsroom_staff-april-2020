@@ -1,6 +1,6 @@
 const initialState = {
   authenticatedAs: "",
   uid: "",
-  article: null,
+  article: {},
 };
 export default initialState;

@@ -7,6 +7,7 @@ import createHeaders from "../modules/headers";
 const CreateArticle = () => {
   const [message, setMessage] = useState("");
   const [imagePreview, setImagePreview] = useState("");
+  const [loading, setLoading] = useState(false)
 
   const toBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -23,6 +24,7 @@ const CreateArticle = () => {
   const onSubmitHandler = async (e) => {
     try {
       e.persist();
+      setLoading(true)
       const category = document
         .getElementById("category")
         .firstElementChild.innerText.toLowerCase();
@@ -41,10 +43,12 @@ const CreateArticle = () => {
         { headers: createHeaders() }
       );
       e.target.reset()
-      setImagePreview("")
+      setLoading(false)
       setMessage(response.data.message);
+      setImagePreview("")
       setTimeout(() => {setMessage("")}, 3000)
     } catch (error) {
+      setLoading(false)
       setMessage(error.response.data.message);
     }
   };
@@ -56,6 +60,7 @@ const CreateArticle = () => {
           onSubmitHandler={onSubmitHandler}
           handleUploadChange={handleUploadChange}
           message={message}
+          loading={loading}
         />
       </Container>
       <Container className="writing-container">

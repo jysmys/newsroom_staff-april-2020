@@ -7,24 +7,27 @@ const Preview = () => {
   const singleArticle = useSelector((state) => state.article);
 
   return (
-    <Container id="preview" align="center">
-      <Grid>
-        <Grid.Row centered>
-          <Container id="image">
-            <Image src={singleArticle.image} />
+    <>
+      <Grid.Row centered >
+        <Container align="left" id="image-container">
+          <div className="image">
+            <Image
+              src={singleArticle.image}
+              style={{ height: "400px", width: "800px" }}
+            />
             <h2 id="preview-title">{singleArticle.title}</h2>
-          </Container>
-        </Grid.Row>
-        <Grid.Row centered id="created-text">
-          Created at: {singleArticle.created_at}
-        </Grid.Row>
-        <Grid.Row centered id="preview-body">
-          <p id="body" className="article-body">
-            {singleArticle.body}
-          </p>
-        </Grid.Row>
-      </Grid>
-    </Container>
+          </div>
+        </Container>
+      </Grid.Row>
+      <Grid.Row centered id="created-text">
+        <p>Created at: {singleArticle.created_at}</p>
+      </Grid.Row>
+      <Grid.Row centered id="preview-body">
+        <p id="body" className="article-body">
+          {singleArticle.body}
+        </p>
+      </Grid.Row>
+    </>
   );
 };
 

@@ -19,6 +19,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         article: action.payload.article,
       };
+    case "RESET_ARTICLE_PREVIEW":
+      const article = state.article
+      return {
+        ...state,
+        article: { ...article, published: true}
+      }
     default:
       return state;
   }

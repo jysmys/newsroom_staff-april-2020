@@ -32,10 +32,11 @@ const Review = () => {
 
   const unpublishedArticlesRender =
     unpublishedArticleList.length === 0 ? (
-      <p id="no-articles">There isn't any unpublished articles</p>
+      <p id="no-articles">There aren't any unpublished articles</p>
     ) : (
       <List divided relaxed>
         {unpublishedArticleList.map((article) => {
+          const color = article.id === singleArticle.id? "teal" : "grey"
           return (
             <List.Item
               key={article.id}
@@ -57,7 +58,7 @@ const Review = () => {
                     to={{ pathname: `/review/${article.id}` }}
                     style={{ float: "right" }}
                   >
-                    <Button size="tiny" id={"checkout-article-" + article.id}>
+                    <Button color={color} size="tiny" id={"checkout-article-" + article.id}>
                       Checkout Article
                     </Button>
                   </Link>
@@ -71,8 +72,7 @@ const Review = () => {
         })}
       </List>
     );
-
-  const previewRender = singleArticle ? (
+  const previewRender = singleArticle.id && !singleArticle.published ? (
     <Preview />
   ) : (
     <div id="preview-message">{previewMessage}</div>
@@ -81,10 +81,10 @@ const Review = () => {
   return (
     <div id="review-page">
       <Grid columns={2}>
-        <Grid.Column id="left">
+        <Grid.Column id="article-list">
           <Container>{unpublishedArticlesRender}</Container>
         </Grid.Column>
-        <Grid.Column>{previewRender}</Grid.Column>
+        <Grid.Column id="preview">{previewRender}</Grid.Column>
       </Grid>
     </div>
   );

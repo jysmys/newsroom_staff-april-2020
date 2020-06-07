@@ -20,7 +20,7 @@ const Header = (props) => {
   const redirect = !authenticatedAs && <Redirect to={{ pathname: "/" }} />;
 
   return (
-    <Container className="header">
+    <Container className="header-container">
       {redirect}
       <Menu className="header" stackable>
         <Menu.Item>
